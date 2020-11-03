@@ -1,0 +1,14 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+html, body {
+  font-family: "Roboto", sans-serif;
+  font-size: 3.75vw;
+  background-color: #252525;
+  color: #fff;
+  @media (min-width: 480px) {
+    & {
+      font-size: 18px
+    }
+  }
+}
