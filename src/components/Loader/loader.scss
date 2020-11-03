@@ -1,0 +1,21 @@
+.spinner {
+  text-align: center;
+  animation-name: loading;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes loading{
+  from {
+    color: white;
+  }
+
+  50% {
+    color: orange;
+  }
+
+  to {
+    color: white;
+  }
+}
