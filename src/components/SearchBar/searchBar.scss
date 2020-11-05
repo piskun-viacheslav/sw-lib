@@ -1,0 +1,28 @@
+input {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.searchBar {
+  width: 90%;
+  margin: 0 auto 1rem;
+  &__input {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 0.3rem;
+
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+
+    background-color: rgba(#fff, 0.5);
+    transition: background-color 0.3s;
+    &:focus {
+      background-color: rgba(#fff, 0.8);
+    }
+  }
+}
