@@ -1,0 +1,29 @@
+.item {
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  box-shadow: 0.2rem 0.2rem 1rem #181818;
+  background-color: rgba(#fff, 0.15);
+  & > :not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #FFE81F;
+}
+
+.imageContainer {
+  text-align: center;
+}
+
+.image {
+  height: 10rem;
+  border-radius: 0.4rem;
+  box-shadow: 0.2rem 0.2rem 0.5rem #181818;
+}

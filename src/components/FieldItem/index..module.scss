@@ -1,0 +1,17 @@
+.field {
+  display: flex;
+  opacity: 0.9;
+}
+
+.cell {
+  flex-basis: 5rem;
+  flex-grow: 1;
+  &:first-child {
+    flex-grow: 0.6;
+    opacity: 0.9;
+  }
+
+  &:last-child {
+    font-weight: 400;
+  }
+}

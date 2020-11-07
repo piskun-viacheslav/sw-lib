@@ -1,36 +1,24 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import FieldList from "../FieldList";
 
-const Person = ({ person }) => {
-    const { name, gender, birthYear, height, mass } = person;
+import styles from './index.module.scss';
+
+const Person = ({ data, classList = ''}) => {
+    const { info, name, imageUrl } = data;
+
     return (
-        <div className='libraryItem'>
-            <h2 className="libraryItem__title">{ name }</h2>
-            <div className="libraryItem__imageContainer">
-                <div className="libraryItem__image libraryItem__image_person"></div>
+        <div className={classNames(styles.item, classList)}>
+            <h2 className={styles.title}>{ name }</h2>
+            <div className={styles.imageContainer}>
+                <img className={styles.image}
+                     src={imageUrl}
+                     alt={`${name} image`}
+                />
             </div>
-            <div className="libraryItem__content">
-                <div className="libraryItem__field libraryItemField">
-                    <div className="libraryItemField__item">Name:</div>
-                    <div className="libraryItemField__item">{ name }</div>
-                </div>
-                <div className="libraryItem__field libraryItemField">
-                    <div className="libraryItemField__item">Gender:</div>
-                    <div className="libraryItemField__item">{ gender }</div>
-                </div>
-                <div className="libraryItem__field libraryItemField">
-                    <div className="libraryItemField__item">Birthday:</div>
-                    <div className="libraryItemField__item">{birthYear}</div>
-                </div>
-                <div className="libraryItem__field libraryItemField">
-                    <div className="libraryItemField__item">Height:</div>
-                    <div className="libraryItemField__item">{ height } cm</div>
-                </div>
-                <div className="libraryItem__field libraryItemField">
-                    <div className="libraryItemField__item">Mass:</div>
-                    <div className="libraryItemField__item">{ mass } kg</div>
-                </div>
-            </div>
-            <button className="libraryItem__backButton" type="button">&#60;&#60; Back</button>
+            <FieldList fieldList={ info } />
+            <button className="backButton" type="button">&#60;&#60; Back</button>
         </div>
     )
 };
