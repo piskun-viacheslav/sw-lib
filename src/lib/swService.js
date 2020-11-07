@@ -1,20 +1,33 @@
-const SW__BASE__URL = 'https://swapi.dev/api/';
 
 class SWService {
+    SW__BASE__URL = 'https://swapi.dev/api/';
+    PERSON_IMG_URL = 'https://starwars-visualguide.com/assets/img/characters/';
+
     #idTemplate = /\/([0-9]+)\//;
 
     #getItemId = (stringWithId) => {
         return stringWithId.match(this.#idTemplate)[1];
     };
 
-    #modifyPerson = (personData) => ({
-        id: this.#getItemId(personData.url),
-        name: personData.name,
-        gender: personData.gender,
-        birthYear: personData.birth_year,
-        height: personData.height,
-        mass: personData.mass
-    });
+    #getImageUrl = (baseUrl, id) => baseUrl + id + '.jpg';
+
+    #modifyPerson = (personData) => {
+        const id = this.#getItemId(personData.url);
+        const imageUrl = this.#getImageUrl(this.PERSON_IMG_URL, id);
+
+        return {
+            id,
+            imageUrl,
+            name: personData.name,
+            info: [
+                {id: 1, title: 'Name', value: personData.name},
+                {id: 2, title: 'Gender', value: personData.gender},
+                {id: 3, title: 'Year of birth', value: personData.birth_year},
+                {id: 4, title: 'Height', value: personData.height},
+                {id: 5, title: 'Mass', value: personData.mass},
+            ],
+        }
+    };
 
     #modifyPlanet = (planetData) => ({
         id: this.#getItemId(planetData.url),
@@ -35,7 +48,7 @@ class SWService {
     });
 
     getData = async (url) => {
-        const res = await fetch(SW__BASE__URL + url);
+        const res = await fetch(this.SW__BASE__URL + url);
         return await res.json();
     };
 
