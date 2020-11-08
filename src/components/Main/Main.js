@@ -3,10 +3,8 @@ import {Route} from "react-router";
 import SWService from "../../lib/swService";
 
 import LibraryList from "../LibraryList";
+import LibraryItemRoot from "../LibraryItemRoot";
 import LibraryItem from "../LibraryItem";
-import Person from "../Person";
-import Planet from "../Planet";
-import Starship from "../Starship";
 // import PropTypes from 'prop-types';
 
 const sw = new SWService();
@@ -38,24 +36,26 @@ const Main = () => {
                    />
                }/>
         <Route path={'/people/:id'} render={ ({match}) => (
-            <LibraryItem
+            <LibraryItemRoot
                 id={match.params.id}
                 getData={sw.getPerson}
-                viewData={(data) => <Person data={data} />}
+                viewData={(data) => <LibraryItem data={data} />}
             />)
         }/>
-        <Route path={'/planets/:id'} render={ ({match}) => ( <LibraryItem
-            id={match.params.id}
-            getData={sw.getPlanet}
-            viewData={(data) => <Planet planet={data} />}
-        />)
+        <Route path={'/planets/:id'} render={ ({match}) => (
+            <LibraryItemRoot
+                id={match.params.id}
+                getData={sw.getPlanet}
+                viewData={(data) => <LibraryItem data={data} />}
+            />)
         }/>
 
-        <Route path={'/starships/:id'} render={ ({match}) => ( <LibraryItem
-            id={match.params.id}
-            getData={sw.getStarship}
-            viewData={(data) => <Starship starship={data} />}
-        />)
+        <Route path={'/starships/:id'} render={ ({match}) => (
+            <LibraryItemRoot
+                id={match.params.id}
+                getData={sw.getStarship}
+                viewData={(data) => <LibraryItem data={data} />}
+            />)
         }/>
     </main>
 )};

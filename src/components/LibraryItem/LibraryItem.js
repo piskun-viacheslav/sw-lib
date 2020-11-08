@@ -1,63 +1,26 @@
-import React, { Component } from 'react';
-import Loader from "../Loader";
+import React from 'react';
+// import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import FieldList from "../FieldList";
 
-class LibraryItem extends Component {
-    state = {
-        dataList: null,
-        isLoading: true,
-        isError: false,
-    };
+import styles from './index.module.scss';
 
-    componentDidMount() {
-        this.props.getData(this.props.id)
-            .then(data => {
-                this.setState({
-                    dataList: data,
-                    isLoading: false,
-                    isError: false
-                })
-            })
-            .catch(() => this.setState({
-                isLoading: false,
-                isError: true,
-            }));
-    }
+const LibraryItem = ({ data, classList = ''}) => {
+    const { info, name, imageUrl } = data;
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.id !== this.props.id) {
-            this.setState({
-                dataList: null,
-                isLoading: true,
-                isError: false,
-            });
+    return (
+        <div className={classNames(styles.item, classList)}>
+            <h2 className={styles.title}>{ name }</h2>
+            <div className={styles.imageContainer}>
+                <img className={styles.image}
+                     src={imageUrl}
+                     alt={name}
+                />
+            </div>
+            <FieldList fieldList={ info } />
+            <button className="backButton" type="button">&#60;&#60; Back</button>
+        </div>
+    )
+};
 
-            this.props.getData(this.props.id)
-                .then(data => {
-                    this.setState({
-                        dataList: data,
-                        isLoading: false,
-                        isError: false
-                    })
-                })
-                .catch(() => this.setState({
-                    isLoading: false,
-                    isError: true,
-                }));
-        }
-    }
-
-    render() {
-        const { isLoading, isError, dataList } = this.state;
-
-        if (isError) {
-            return <div>error</div>
-        }
-        if (isLoading) {
-            return <Loader/>
-        }
-
-        return this.props.viewData(dataList);
-    }
-}
-
-export default LibraryItem
+export default LibraryItem;
