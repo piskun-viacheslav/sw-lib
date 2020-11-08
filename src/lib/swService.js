@@ -2,6 +2,8 @@
 class SWService {
     SW__BASE__URL = 'https://swapi.dev/api/';
     PERSON_IMG_URL = 'https://starwars-visualguide.com/assets/img/characters/';
+    PLANET_IMG_URL = 'https://starwars-visualguide.com/assets/img/planets/';
+    STARSHIP_IMG_URL = 'https://starwars-visualguide.com/assets/img/starships/';
 
     #idTemplate = /\/([0-9]+)\//;
 
@@ -29,23 +31,41 @@ class SWService {
         }
     };
 
-    #modifyPlanet = (planetData) => ({
-        id: this.#getItemId(planetData.url),
-        name: planetData.name,
-        rotationPeriod: planetData.rotation_period,
-        climate: planetData.climate,
-        terrain: planetData.terrain,
-        population: planetData.population
-    });
+    #modifyPlanet = (planetData) => {
+        const id = this.#getItemId(planetData.url);
+        const imageUrl = this.#getImageUrl(this.PLANET_IMG_URL, id);
 
-    #modifyStarship = (starshipData) => ({
-        id: this.#getItemId(starshipData.url),
-        name: starshipData.name,
-        model: starshipData.model,
-        length: starshipData.length,
-        passengers: starshipData.passengers,
-        hyperdriveRating: starshipData.hyperdrive_rating,
-    });
+        return {
+            id,
+            imageUrl,
+            name: planetData.name,
+            info: [
+                {id: 1, title: 'Name', value: planetData.name},
+                {id: 2, title: 'Rotation period', value: planetData.rotation_period},
+                {id: 3, title: 'Climate', value: planetData.climate},
+                {id: 4, title: 'Terrain', value: planetData.terrain},
+                {id: 5, title: 'Population', value: planetData.population},
+            ]
+        }
+    };
+
+    #modifyStarship = (starshipData) => {
+        const id = this.#getItemId(starshipData.url);
+        const imageUrl = this.#getImageUrl(this.STARSHIP_IMG_URL, id);
+
+        return {
+            id,
+            imageUrl,
+            name: starshipData.name,
+            info: [
+                {id: 1, title: 'Name', value: starshipData.name},
+                {id: 2, title: 'Model', value: starshipData.model},
+                {id: 3, title: 'Length', value: starshipData.length},
+                {id: 4, title: 'Passengers', value: starshipData.passengers},
+                {id: 5, title: 'HyperDrive rating', value: starshipData.hyperdrive_rating},
+            ]
+        }
+    };
 
     getData = async (url) => {
         const res = await fetch(this.SW__BASE__URL + url);
