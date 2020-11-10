@@ -1,6 +1,6 @@
 {
   "name": "sw-lib",
-  "homepage": "https://github.com/piskun-viacheslav/sw-lib",
+  "homepage": "https://piskun-viacheslav.github.com/sw-lib",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
