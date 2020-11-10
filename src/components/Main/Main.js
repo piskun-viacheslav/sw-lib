@@ -1,63 +1,45 @@
 import React from 'react';
-import {Route} from "react-router";
-import SWService from "../../lib/swService";
+import { Route, Switch } from "react-router";
+import SWService from "../../lib/services/swService";
 
+import LibraryRoot from "../LibraryRoot";
 import LibraryList from "../LibraryList";
-import LibraryItemRoot from "../LibraryItemRoot";
 import LibraryItem from "../LibraryItem";
+
+import Page404 from "../Page404";
+import Home from "../Home";
 // import PropTypes from 'prop-types';
 
 const sw = new SWService();
-const Main = () => {
-    return(
 
+const Main = () => (
     <main>
-        <Route path={'/people'} exact
-               render={
+        <Switch>
+            <Route path='/' exact component={ Home } />
+            <Route
+                exact
+                path='/:category/:id'
+                render={ ({match }) =>
+                    <LibraryRoot
+                        match={match}
+                        getData={sw.getItemData}
+                        component={LibraryItem}
+                    />
+                }/>
 
-                   ({match}) => <LibraryList
-                       getData={sw.getAllPeople}
-                       match={match}
-                       // component={Person}
+            <Route
+                exact
+                path='/:category'
+                render={({match}) =>
+                   <LibraryRoot
+                        match={match}
+                        getData={sw.getListData}
+                        component={LibraryList}
                    />
                }/>
-        <Route path={'/planets'} exact
-               render={
-                   ({match}) => <LibraryList
-                       getData={sw.getAllPlanets}
-                       match={match}
-                   />
-               }/>
-        <Route path={'/starships'} exact
-               render={
-                   ({match}) => <LibraryList
-                       getData={sw.getAllStarships}
-                       match={match}
-                   />
-               }/>
-        <Route path={'/people/:id'} render={ ({match}) => (
-            <LibraryItemRoot
-                id={match.params.id}
-                getData={sw.getPerson}
-                viewData={(data) => <LibraryItem data={data} />}
-            />)
-        }/>
-        <Route path={'/planets/:id'} render={ ({match}) => (
-            <LibraryItemRoot
-                id={match.params.id}
-                getData={sw.getPlanet}
-                viewData={(data) => <LibraryItem data={data} />}
-            />)
-        }/>
-
-        <Route path={'/starships/:id'} render={ ({match}) => (
-            <LibraryItemRoot
-                id={match.params.id}
-                getData={sw.getStarship}
-                viewData={(data) => <LibraryItem data={data} />}
-            />)
-        }/>
+            <Route component={Page404} />
+        </Switch>
     </main>
-)};
+);
 
 export default Main;
