@@ -42,7 +42,7 @@ class LibraryRoot extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('componentDidUpdate() before if', this.state);
-        if (this.state.loadedData === null) {
+        if (prevProps.match.url !== this.props.match.url) {
             console.log('componentDidUpdate() after if', this.state);
 
             const { url, params: { category } } = this.props.match;
