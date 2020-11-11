@@ -72,17 +72,23 @@ class SWService {
     };
 
     getData = async (url, options) => {
-        const res = await fetch(this.SW_BASE_URL + url, options);
+        const res = await fetch(
+            this.SW_BASE_URL + url, {
+                signal: options.signal
+            });
+
         return await res.json();
     };
 
-    getItemData = async (url, category) => {
-        const data = await this.getData(url);
+    getItemData = async (url, category, ctrl) => {
+        const data = await this.getData(url, ctrl);
+
         return this.SW_CATEGORIES[category](data);
     };
 
-    getListData = async (url, category) => {
-        const data = await this.getData(url);
+    getListData = async (url, category, ctrl) => {
+        const data = await this.getData(url, ctrl);
+
         return data.results.map(this.SW_CATEGORIES[category])
     };
 }

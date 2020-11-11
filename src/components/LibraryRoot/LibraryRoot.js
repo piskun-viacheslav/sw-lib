@@ -8,46 +8,74 @@ class LibraryRoot extends Component {
         isError: false,
     };
 
+    _fetchController = null;
+
+    startLoading= () => {
+        this.setState({
+            loadedData: null,
+            isLoading: true,
+            isError: false
+        })
+    };
+
+    handleSucces = (data) => {
+        this.setState({
+            loadedData: data,
+            isLoading: false,
+            isError: false
+        })
+    };
+
+    handleError = (e) => {
+        if (e.name === 'AbortError') {
+            console.log('--- current fetch was aborted ----')
+
+            this.startLoading();
+            return;
+        }
+
+        this.setState({
+            isLoading: false,
+            isError: true,
+        })
+    };
+
     getLibraryData = (dataUrl, categoryType) => {
-        this.props.getData(dataUrl, categoryType)
-            .then(data => {
-                this.setState({
-                    loadedData: data,
-                    isLoading: false,
-                    isError: false
-                })
-            })
-            .catch(() => this.setState({
-                isLoading: false,
-                isError: true,
-            }));
+        if( this._fetchController ) {
+            this._fetchController.abort()
+        }
+
+        this._fetchController = new AbortController();
+        console.log('--- new controller was created ---')
+        this.props.getData(
+            dataUrl,
+            categoryType,
+            this._fetchController
+        )
+            .then(this.handleSucces)
+            .catch(this.handleError);
     };
 
     componentDidMount() {
-        console.log('componentDidMount()', this.state)
         const { url, params: { category } } = this.props.match;
         this.getLibraryData(url, category);
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if(nextProps.match.url !== this.props.match.url){
-            console.log('componentWillReceiveProps() before setState', this.state);
-            this.setState({
-                loadedData: null,
-                isLoading: true,
-                isError: false
-            })
+        if(nextProps.match.url !== this.props.match.url) {
+          this.startLoading();
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('componentDidUpdate() before if', this.state);
         if (prevProps.match.url !== this.props.match.url) {
-            console.log('componentDidUpdate() after if', this.state);
-
             const { url, params: { category } } = this.props.match;
             this.getLibraryData(url, category);
         }
+    }
+
+    componentWillUnmount() {
+        this._fetchController.abort();
     }
 
     render() {
