@@ -1,3 +1,7 @@
+const defaultPersonImg = require('../../images/person.png');
+const defaultPlanetImg = require('../../images/planet.png');
+const defaultStarshipImg = require('../../images/starship.png');
+
 class SWService {
     #idTemplate = /\/([0-9]+)\//;
     SW_BASE_URL = 'https://swapi.dev/api';
@@ -20,10 +24,12 @@ class SWService {
     modifyPerson = (personData) => {
         const id = this.#getItemId(personData.url);
         const imageUrl = this.#getImageUrl(this.PERSON_IMG_URL, id);
+        const defaultImageUrl = defaultPersonImg.default;
 
         return {
             id,
             imageUrl,
+            defaultImageUrl,
             name: personData.name,
             info: [
                 {id: 1, title: 'Name', value: personData.name},
@@ -38,10 +44,12 @@ class SWService {
     modifyPlanet = (planetData) => {
         const id = this.#getItemId(planetData.url);
         const imageUrl = this.#getImageUrl(this.PLANET_IMG_URL, id);
+        const defaultImageUrl = defaultPlanetImg.default;
 
         return {
             id,
             imageUrl,
+            defaultImageUrl,
             name: planetData.name,
             info: [
                 {id: 1, title: 'Name', value: planetData.name},
@@ -56,10 +64,12 @@ class SWService {
     modifyStarship = (starshipData) => {
         const id = this.#getItemId(starshipData.url);
         const imageUrl = this.#getImageUrl(this.STARSHIP_IMG_URL, id);
+        const defaultImageUrl = defaultStarshipImg.default;
 
         return {
             id,
             imageUrl,
+            defaultImageUrl,
             name: starshipData.name,
             info: [
                 {id: 1, title: 'Name', value: starshipData.name},
