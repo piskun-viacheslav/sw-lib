@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import Loader from "../Loader";
-import img from '../../images/person.png'
 
 import styles from './index.module.scss'
-
 
 class ImageBlock extends Component {
     state = {
         isLoading: true,
-        url: null
+        imageUrl: null
     };
 
     componentDidMount() {
-        fetch(this.props.url)
+        fetch(this.props.imageUrl)
             .then(res => {
                 if (res.status <= 300) {
                     return res.blob();
@@ -22,29 +20,28 @@ class ImageBlock extends Component {
                 throw new Error()
             })
             .then(blob => {
-                const url = URL.createObjectURL(blob);
+                const imageUrl = URL.createObjectURL(blob);
                 this.setState({
                     isLoading: false,
-                    url
+                    imageUrl
                 })
             })
             .catch(() => {
                 this.setState({
                     isLoading: false,
-                    url: this.props.defaultUrl,
+                    imageUrl: this.props.defaultImageUrl,
                 });
             });
     }
 
-
     render() {
-        const { isLoading, url} = this.state;
+        const { isLoading, imageUrl} = this.state;
 
         if(isLoading) {
             return <Loader/>
         }
 
-        return <img className={styles.image} src={url} alt=""/>
+        return <img className={styles.image} src={imageUrl} alt=""/>
     }
 }
 

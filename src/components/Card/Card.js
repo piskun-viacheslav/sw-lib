@@ -13,7 +13,7 @@ const Card = ({ data, classNames = ''}) => {
         <div className={cx(styles.card, classNames)}>
             <h2 className={styles.title}>{ name }</h2>
             <div className={styles.imageContainer}>
-                <ImageBlock url={imageUrl} defaultUrl={defaultImageUrl}/>
+                <ImageBlock imageUrl={imageUrl} defaultImageUrl={defaultImageUrl}/>
             </div>
             <CardDetailsItem fieldList={ info } />
             <button className="backButton" type="button">&#60;&#60; Back</button>

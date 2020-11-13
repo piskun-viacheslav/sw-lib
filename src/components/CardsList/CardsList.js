@@ -11,7 +11,7 @@ const CardsList = ({ data = [], match }) => {
         <li className="libraryList__item" key={ person.id }>
             <Link className="libraryList__link" to={url + '/' + person.id }>
                 <div className={styles.imageContainer}>
-                    <ImageBlock url={person.imageUrl} defaultUrl={person.defaultImageUrl}/>
+                    <ImageBlock imageUrl={person.imageUrl} defaultImageUrl={person.defaultImageUrl}/>
                 </div>
                 <p>{ person.name }</p>
             </Link>
