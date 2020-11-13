@@ -1,13 +1,19 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
+import CardDetailsItem from "../CardDetailsItem";
 import cx from 'classnames';
-import styles from './index..module.scss';
+import styles from "./index.module.scss";
 
-const CardDetailsList = ({ fieldItem, classNames = ''}) => (
-    <li className={cx(styles.detail, classNames)}>
-        <span className={styles.cell}>{ fieldItem.title }</span>
-        <span className={styles.cell}>{ fieldItem.value }</span>
-    </li>
+const CardDetailsList = ({ fieldList, classNames = ''}) =>(
+    <ul className={cx(classNames)}>
+        {
+            fieldList.map(item => <CardDetailsItem
+                key={item.id}
+                fieldItem={item}
+                classNames={styles.item}
+            />)
+        }
+    </ul>
 );
 
 export default CardDetailsList;

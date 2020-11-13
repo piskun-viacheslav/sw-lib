@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import cx from 'classnames';
-import CardDetailsItem from "../CardDetailsItem";
+import CardDetailsItem from "../CardDetailsList";
 import ImageBlock from "../ImageBlock";
 
 import styles from './index.module.scss';
