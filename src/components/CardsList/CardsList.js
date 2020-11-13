@@ -7,20 +7,20 @@ import styles from './index.module.scss'
 
 const CardsList = ({ data = [], match }) => {
     const { url } = match;
-    const dataView = data.map(person => (
-        <li className="libraryList__item" key={ person.id }>
-            <Link className="libraryList__link" to={url + '/' + person.id }>
-                <div className={styles.imageContainer}>
-                    <ImageBlock imageUrl={person.imageUrl} defaultImageUrl={person.defaultImageUrl}/>
-                </div>
-                <p>{ person.name }</p>
-            </Link>
-        </li>));
+
     return (
         <ul className="libraryList">
             {
-                dataView.length
-                    ? dataView
+                data.length
+                    ? data.map( item => (
+                        <li className="libraryList__item" key={ item.id }>
+                            <Link className="libraryList__link" to={url + '/' + item.id }>
+                                <div className={styles.imageContainer}>
+                                    <ImageBlock imageUrl={item.imageUrl} defaultImageUrl={item.defaultImageUrl}/>
+                                </div>
+                                <p>{ item.name }</p>
+                            </Link>
+                        </li>))
                     : <li className="libraryList__item">no items</li>
             }
         </ul>
