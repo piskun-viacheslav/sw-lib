@@ -82,12 +82,12 @@ class CardsRoot extends Component {
         const { isLoading, isError, loadedData } = this.state;
         const {component: Component} = this.props;
         console.log('render', this.state);
+        if (isLoading) {
+            return <Loader/>
+        }
 
         if (isError) {
             return <div>error</div>
-        }
-        if (isLoading) {
-            return <Loader/>
         }
 
         return <Component data={loadedData}/>;
