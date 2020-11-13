@@ -14,6 +14,10 @@ html, body {
   }
 }
 
+link, button, div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 button {
   box-sizing: border-box;
   outline: none;
@@ -22,11 +26,9 @@ button {
 }
 
 .libraryList {
-  width: 90%;
-  margin: 0 auto;
-  &__item {
-    display: block;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 1rem;
 
   &__link {
     display: block;
@@ -35,14 +37,14 @@ button {
     text-decoration: none;
     text-align: center;
     color: inherit;
+    transition: background-color 0.3s;
     &:hover{
-      color: #252525;
-      background-color: rgba(#fff, 0.8);
-      opacity: 0.7;
+      background-color: rgba(#fff, 0.1);
     }
 
     &:active {
-      opacity: 1;
+      transition: none;
+      background-color: rgba(#fff, 0.2);
     }
   }
 }
