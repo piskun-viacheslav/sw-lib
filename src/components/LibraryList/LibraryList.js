@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import ImageBlock from "../ImageBlock";
 // import PropTypes from 'prop-types';
+
+import styles from './index.module.scss'
 
 const LibraryList = ({ data = [], match }) => {
     const { url } = match;
     const dataView = data.map(person => (
         <li className="libraryList__item" key={ person.id }>
             <Link className="libraryList__link" to={url + '/' + person.id }>
-                { person.name }
+                <div className={styles.imageContainer}>
+                    <ImageBlock url={person.imageUrl} defaultUrl={person.defaultImageUrl}/>
+                </div>
+                <p>{ person.name }</p>
             </Link>
         </li>));
     return (
