@@ -10,7 +10,7 @@ const Card = ({ data, classNames = ''}) => {
     const { info, name, imageUrl, defaultImageUrl } = data;
 
     return (
-        <div className={cx(styles.item, classNames)}>
+        <div className={cx(styles.card, classNames)}>
             <h2 className={styles.title}>{ name }</h2>
             <div className={styles.imageContainer}>
                 <ImageBlock url={imageUrl} defaultUrl={defaultImageUrl}/>

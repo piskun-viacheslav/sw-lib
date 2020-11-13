@@ -10,7 +10,7 @@ const CardDetailsItem = ({ fieldList, classNames = ''}) =>(
             fieldList.map(item => <CardDetailsList
                 key={item.id}
                 fieldItem={item}
-                classList={styles.fieldItem}
+                classList={styles.item}
             />)
         }
     </ul>
