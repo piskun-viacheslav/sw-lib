@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch } from "react-router";
 import SWService from "../../lib/services/swService";
 
-import LibraryRoot from "../LibraryRoot";
-import LibraryList from "../LibraryList";
-import LibraryItem from "../LibraryItem";
+import CardsRoot from "../CardsRoot";
+import CardsList from "../CardsList";
+import Card from "../Card";
 
 import Page404 from "../Page404";
 import Home from "../Home";
@@ -12,7 +12,7 @@ import Home from "../Home";
 
 const sw = new SWService();
 
-const Main = () => (
+const Routes = () => (
     <main>
         <Switch>
             <Route path='/' exact component={ Home } />
@@ -20,10 +20,10 @@ const Main = () => (
                 exact
                 path='/:category/:id'
                 render={ ({match }) =>
-                    <LibraryRoot
+                    <CardsRoot
                         match={match}
                         getData={sw.getItemData}
-                        component={LibraryItem}
+                        component={Card}
                     />
                 }/>
 
@@ -31,10 +31,10 @@ const Main = () => (
                 exact
                 path='/:category'
                 render={({match}) =>
-                   <LibraryRoot
+                   <CardsRoot
                         match={match}
                         getData={sw.getListData}
-                        component={LibraryList}
+                        component={CardsList}
                    />
                }/>
             <Route component={Page404} />
@@ -42,4 +42,4 @@ const Main = () => (
     </main>
 );
 
-export default Main;
+export default Routes;

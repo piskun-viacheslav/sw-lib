@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Loader from "../Loader";
 
-class LibraryRoot extends Component {
+class CardsRoot extends Component {
     state = {
         loadedData: null,
         isLoading: true,
@@ -94,4 +94,4 @@ class LibraryRoot extends Component {
     }
 }
 
-export default LibraryRoot;
+export default CardsRoot;

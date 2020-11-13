@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from "../Header";
 import SearchBar from "../SearchBar";
-import Main from "../Main";
+import Routes from "../Routes";
 
 import './app.scss';
 
@@ -12,7 +12,7 @@ const App  = () => {
         <div className="app">
             <Header/>
             <SearchBar/>
-            <Main/>
+            <Routes/>
         </div>
     )
 };

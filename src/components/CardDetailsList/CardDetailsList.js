@@ -3,11 +3,11 @@ import React from 'react';
 import cx from 'classnames';
 import styles from './index..module.scss';
 
-const FieldItem = ({ fieldItem, classNames = ''}) => (
+const CardDetailsList = ({ fieldItem, classNames = ''}) => (
     <li className={cx(styles.field, classNames)}>
         <span className={styles.cell}>{ fieldItem.title }</span>
         <span className={styles.cell}>{ fieldItem.value }</span>
     </li>
 );
 
-export default FieldItem;
+export default CardDetailsList;

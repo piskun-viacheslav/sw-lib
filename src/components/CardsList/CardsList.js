@@ -5,7 +5,7 @@ import ImageBlock from "../ImageBlock";
 
 import styles from './index.module.scss'
 
-const LibraryList = ({ data = [], match }) => {
+const CardsList = ({ data = [], match }) => {
     const { url } = match;
     const dataView = data.map(person => (
         <li className="libraryList__item" key={ person.id }>
@@ -27,4 +27,4 @@ const LibraryList = ({ data = [], match }) => {
     )
    };
 
-export default LibraryList;
+export default CardsList;

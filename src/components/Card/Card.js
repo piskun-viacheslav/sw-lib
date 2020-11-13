@@ -1,12 +1,12 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import cx from 'classnames';
-import FieldList from "../FieldList";
+import CardDetailsItem from "../CardDetailsItem";
 import ImageBlock from "../ImageBlock";
 
 import styles from './index.module.scss';
 
-const LibraryItem = ({ data, classNames = ''}) => {
+const Card = ({ data, classNames = ''}) => {
     const { info, name, imageUrl, defaultImageUrl } = data;
 
     return (
@@ -15,10 +15,10 @@ const LibraryItem = ({ data, classNames = ''}) => {
             <div className={styles.imageContainer}>
                 <ImageBlock url={imageUrl} defaultUrl={defaultImageUrl}/>
             </div>
-            <FieldList fieldList={ info } />
+            <CardDetailsItem fieldList={ info } />
             <button className="backButton" type="button">&#60;&#60; Back</button>
         </div>
     )
 };
 
-export default LibraryItem;
+export default Card;
