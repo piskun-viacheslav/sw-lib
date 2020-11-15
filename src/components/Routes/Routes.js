@@ -16,27 +16,18 @@ const Routes = () => (
     <main>
         <Switch>
             <Route path='/' exact component={ Home } />
-            <Route
-                exact
-                path='/:category/:id'
-                render={ ({match }) =>
-                    <CardsRoot
-                        match={match}
-                        getData={sw.getItemData}
-                        component={Card}
-                    />
-                }/>
-
-            <Route
-                exact
-                path='/:category'
-                render={({match}) =>
-                   <CardsRoot
-                        match={match}
-                        getData={sw.getListData}
-                        component={CardsList}
-                   />
-               }/>
+            <Route path='/:category/:id' exact>
+                <CardsRoot
+                    getData={sw.getItemData}
+                    component={Card}
+                />
+            </Route>
+            <Route exact path='/:category'>
+                <CardsRoot
+                    getData={sw.getListData}
+                    component={CardsList}
+                />
+            </Route>
             <Route component={Page404} />
         </Switch>
     </main>
