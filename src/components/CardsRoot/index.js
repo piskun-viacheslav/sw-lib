@@ -1,3 +1,4 @@
+import { withRouter } from "react-router";
 import CardsRoot from "./CardsRoot";
 
-export default CardsRoot;
+export default withRouter(CardsRoot);
