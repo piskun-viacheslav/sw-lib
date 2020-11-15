@@ -11,14 +11,6 @@ class CardsRoot extends Component {
 
     _fetchController = null;
 
-    startLoading= () => {
-        this.setState({
-            loadedData: null,
-            isLoading: true,
-            isError: false
-        })
-    };
-
     handleSucces = (data) => {
         this.setState({
             loadedData: data,
@@ -70,7 +62,7 @@ class CardsRoot extends Component {
             loadedData: null,
             isLoading: true,
             isError: false,
-        }
+        };
 
         return null;
     }
@@ -88,7 +80,7 @@ class CardsRoot extends Component {
     }
 
     render() {
-        const { isLoading, isError, loadedData } = this.state;
+        const { isLoading, isError, loadedData, url } = this.state;
         const {component: Component} = this.props;
         console.log('render', this.state);
         if (isLoading) {
@@ -99,7 +91,7 @@ class CardsRoot extends Component {
             return <div>error</div>
         }
 
-        return <Component data={loadedData}/>
+        return <Component data={loadedData} url={url}/>
     }
 }
 
