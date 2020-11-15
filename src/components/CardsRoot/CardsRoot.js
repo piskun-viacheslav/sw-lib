@@ -3,6 +3,7 @@ import Loader from "../Loader";
 
 class CardsRoot extends Component {
     state = {
+        url: this.props.match.url,
         loadedData: null,
         isLoading: true,
         isError: false,
@@ -30,7 +31,6 @@ class CardsRoot extends Component {
         if (e.name === 'AbortError') {
             console.log('--- current fetch was aborted ----')
 
-            this.startLoading();
             return;
         }
 
@@ -57,19 +57,28 @@ class CardsRoot extends Component {
     };
 
     componentDidMount() {
-        const { url, params: { category } } = this.props.match;
+        const { params: { category } } = this.props.match;
+        const { url } = this.state;
         this.getLibraryData(url, category);
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        if(nextProps.match.url !== this.props.match.url) {
-          this.startLoading();
+    static getDerivedStateFromProps(props, state) {
+        if(props.match.url !== state.url)
+
+        return {
+            url: props.match.url,
+            loadedData: null,
+            isLoading: true,
+            isError: false,
         }
+
+        return null;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.match.url !== this.props.match.url) {
-            const { url, params: { category } } = this.props.match;
+        if (prevState.url !== this.state.url) {
+            const {  params: { category } } = this.props.match;
+            const { url } = this.state;
             this.getLibraryData(url, category);
         }
     }
@@ -90,7 +99,7 @@ class CardsRoot extends Component {
             return <div>error</div>
         }
 
-        return <Component data={loadedData}/>;
+        return <Component data={loadedData}/>
     }
 }
 
