@@ -6,7 +6,8 @@ import ImageBlock from "../ImageBlock";
 
 import styles from './index.module.scss';
 
-const Card = ({ data, classNames = ''}) => {
+const Card = ({ history, data, classNames = ''}) => {
+
     const { info, name, imageUrl, defaultImageUrl } = data;
 
     return (
@@ -16,7 +17,11 @@ const Card = ({ data, classNames = ''}) => {
                 <ImageBlock imageUrl={imageUrl} defaultImageUrl={defaultImageUrl}/>
             </div>
             <CardDetailsItem fieldList={ info } />
-            <button className="backButton" type="button">&#60;&#60; Back</button>
+            <button
+                className={styles.button}
+                type="button"
+                onClick={history.goBack}
+            >&#60;&#60; Back</button>
         </div>
     )
 };

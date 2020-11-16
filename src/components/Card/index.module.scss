@@ -22,3 +22,22 @@
   height: 9rem;
   text-align: center;
 }
+
+.button {
+  width: 30%;
+  display: block;
+  padding: 1rem 0 calc(1rem + 1px);
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #252525;
+  cursor: pointer;
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
