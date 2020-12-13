@@ -101,6 +101,8 @@ class SWService {
 
         return data.results.map(this.SW_CATEGORIES[category])
     };
+
+    modifyDataList = (category, data) => data.results.map(this.SW_CATEGORIES[category]);
 }
 
 export default SWService;
