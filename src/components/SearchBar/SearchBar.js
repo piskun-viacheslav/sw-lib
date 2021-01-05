@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { DebounceInput } from "react-debounce-input";
-import SWService from "../../lib/services/swService";
+
 import SearchResults from "../SearchResults";
 import Loader from "../Loader";
+
+import { SEARCH_CATEGORIES } from "../../lib/configs/constants";
+import SWService from "../../lib/services/swService";
+
 import './searchBar.scss';
 
 const sw = new SWService();
-const SEARCH_CATEGORIES = [
-    { id: 1, name: 'people'},
-    { id: 2, name: 'planets'},
-    { id: 3, name: 'starships'}
-];
 
 class SearchBar extends Component {
     state = {
         category: '',
         value: '',
         foundItems: [],
-        isResVisible: false,
+        isResultBlockVisible: false,
         isLoading: false,
         isError: false,
     };
@@ -28,24 +27,24 @@ class SearchBar extends Component {
         const value = e.target.value.trim();
         if (value) {
          this.setState({
-             isResVisible: true,
+             isResultBlockVisible: true,
              value
          }, this.searchData);
          return;
         }
 
         this.setState({
-            isResVisible: false,
+            isResultBlockVisible: false,
             value: '',
             foundItems: []
         });
     };
 
-    selectCategory = (e) => {
+    handleSelectCategory = (e) => {
         const category = e.target.value;
         this.setState((prevState) => ({
             category,
-            isResVisible: !!prevState.value
+            isResultBlockVisible: !!prevState.value
         }), this.searchData);
     };
 
@@ -78,7 +77,7 @@ class SearchBar extends Component {
 
     closeResults = () => {
         this.setState({
-            isResVisible: false
+            isResultBlockVisible: false
         });
     };
 
@@ -89,15 +88,15 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { value, isResVisible, foundItems, category, isLoading, isError} = this.state;
+        const { value, isResultBlockVisible, foundItems, category, isLoading, isError} = this.state;
         const url = '/' + category;
         return (
             <div className="searchBar">
                 <div className="searchBar__searchBlock">
                     <select 
                         ref={this.selectedValueRef}
-                        onChange={this.selectCategory}
-                        onFocus={this.selectCategory}
+                        onChange={this.handleSelectCategory}
+                        onFocus={this.handleSelectCategory}
                         value={category}
                         className="select"
                     >
@@ -119,7 +118,7 @@ class SearchBar extends Component {
                     </div>
                 </div>
                 {
-                    isResVisible && (
+                    isResultBlockVisible && (
                         <div className="searchResults">
                             { isLoading && <Loader/> }
                             { isError && <div>error</div> }

@@ -1,9 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import cx from 'classnames';
+
 import CardDetailsItem from "../CardDetailsList";
 import ImageBlock from "../ImageBlock";
 
+import cx from 'classnames';
 import styles from './index.module.scss';
 
 const Card = ({ history, data, classNames = ''}) => {
@@ -13,9 +13,11 @@ const Card = ({ history, data, classNames = ''}) => {
     return (
         <div className={cx(styles.card, classNames)}>
             <h2 className={styles.title}>{ name }</h2>
-            <div className={styles.imageContainer}>
-                <ImageBlock imageUrl={imageUrl} defaultImageUrl={defaultImageUrl}/>
-            </div>
+            <ImageBlock
+                classNameWrapper={styles.imageContainer}
+                imageUrl={imageUrl}
+                defaultImageUrl={defaultImageUrl}
+            />
             <CardDetailsItem fieldList={ info } />
             <button
                 className={styles.button}

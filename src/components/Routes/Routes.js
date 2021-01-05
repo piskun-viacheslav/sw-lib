@@ -1,14 +1,13 @@
 import React from 'react';
 import { Route, Switch } from "react-router";
-import SWService from "../../lib/services/swService";
 
+import Home from "../Home";
 import CardsRoot from "../CardsRoot";
 import CardsList from "../CardsList";
 import Card from "../Card";
-
 import Page404 from "../Page404";
-import Home from "../Home";
-// import PropTypes from 'prop-types';
+
+import SWService from "../../lib/services/swService";
 
 const sw = new SWService();
 

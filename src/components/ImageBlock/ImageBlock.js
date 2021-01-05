@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import Loader from "../Loader";
 
 import styles from './index.module.scss'
@@ -36,12 +35,17 @@ class ImageBlock extends Component {
 
     render() {
         const { isLoading, imageUrl} = this.state;
+        const { classNameWrapper = ''} = this.props;
 
         if(isLoading) {
             return <Loader/>
         }
 
-        return <img className={styles.image} src={imageUrl} alt=""/>
+        return (
+            <div className={classNameWrapper}>
+                <img className={styles.image} src={imageUrl} alt=""/>
+            </div>
+        );
     }
 }
 

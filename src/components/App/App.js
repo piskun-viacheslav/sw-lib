@@ -6,7 +6,6 @@ import Routes from "../Routes";
 
 import './app.scss';
 
-
 const App  = () => {
     return (
         <div className="app">

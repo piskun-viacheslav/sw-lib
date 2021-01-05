@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-// import PropTypes from 'prop-types';
 import CardsList from "../CardsList";
+
 import styles from './index.module.scss'
 
 const SearchResults = ({foundItems, url, closeResults }) => (

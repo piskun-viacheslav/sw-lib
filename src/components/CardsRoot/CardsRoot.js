@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Loader from "../Loader";
 
 class CardsRoot extends Component {
@@ -11,7 +12,7 @@ class CardsRoot extends Component {
 
     _fetchController = null;
 
-    handleSucces = (data) => {
+    handleSuccess = (data) => {
         this.setState({
             loadedData: data,
             isLoading: false,
@@ -44,7 +45,7 @@ class CardsRoot extends Component {
             categoryType,
             this._fetchController
         )
-            .then(this.handleSucces)
+            .then(this.handleSuccess)
             .catch(this.handleError);
     };
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+
 import './header.scss';
 
 const Header = () => (
     <header className="header">
-        <div className="header__logo"></div>
+        <div className="header__logo" />
         <nav className="header__nav nav">
             <ul className="nav__list">
                 <li className="nav__item"><NavLink className="nav__link" to="/" exact>Home</NavLink></li>
