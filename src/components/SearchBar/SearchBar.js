@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { DebounceInput } from "react-debounce-input";
 
+import SearchInput from "../SearchInput";
 import SearchResults from "../SearchResults";
 import Loader from "../Loader";
 
@@ -22,6 +22,7 @@ class SearchBar extends Component {
     };
 
     selectedValueRef = React.createRef();
+    _fetchController = null;
 
     handleInputChange = (e) => {
         const value = e.target.value.trim();
@@ -49,13 +50,20 @@ class SearchBar extends Component {
     };
 
     searchData = () => {
+        if( this._fetchController ) {
+            this._fetchController.abort();
+        }
+        this._fetchController = new AbortController();
+
         this.setState({
             isLoading: true,
             isError: false,
         });
         const { value, category } = this.state;
         if (value) {
-            fetch(`https://swapi.dev/api/${category}/?search=${value}`)
+            fetch(`https://swapi.dev/api/${category}/?search=${value}`, {
+                signal: this._fetchController.signal
+            })
                 .then(res => res.json())
                 .then(data => {
                     const foundItems = sw.modifyDataList(this.state.category, data);
@@ -65,7 +73,11 @@ class SearchBar extends Component {
                         isError: false,
                     })
                 })
-                .catch(() => {
+                .catch((e) => {
+                    if (e.name === 'AbortError') {
+                        return;
+                    }
+
                     this.setState({
                         isError: true,
                         isLoading: false,
@@ -87,6 +99,10 @@ class SearchBar extends Component {
         });
     }
 
+    componentWillUnmount() {
+        this._fetchController.abort();
+    }
+
     render() {
         const { value, isResultBlockVisible, foundItems, category, isLoading, isError} = this.state;
         const url = '/' + category;
@@ -104,18 +120,11 @@ class SearchBar extends Component {
                             SEARCH_CATEGORIES.map(cat => <option key={cat.id} value={cat.name}>{cat.name}</option>)
                         }
                     </select>
-                    <div className="searchBar__inputContainer">
-                        <DebounceInput
-                            debounceTimeout={700}
-                            value={value}
-                            type="text"
-                            className="searchBar__input"
-                            placeholder="type here"
-                            autoComplete="off"
-                            onChange={this.handleInputChange}
-                            onFocus={this.handleInputChange}
-                        />
-                    </div>
+                    <SearchInput
+                        value={value}
+                        onFocus={this.handleInputChange}
+                        onChange={this.handleInputChange}
+                    />
                 </div>
                 {
                     isResultBlockVisible && (
