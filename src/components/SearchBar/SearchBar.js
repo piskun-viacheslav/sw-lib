@@ -87,7 +87,7 @@ class SearchBar extends Component {
         }
     };
 
-    closeResults = () => {
+    handleCloseResults = () => {
         this.setState({
             isResultBlockVisible: false
         });
@@ -134,7 +134,7 @@ class SearchBar extends Component {
                             {
                                 !isLoading
                                 && !isError
-                                && <SearchResults foundItems={foundItems} url={url} closeResults={this.closeResults} />
+                                && <SearchResults foundItems={foundItems} url={url} onCloseResults={this.handleCloseResults} />
                             }
                         </div>
                     )

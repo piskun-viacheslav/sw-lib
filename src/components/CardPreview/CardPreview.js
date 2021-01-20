@@ -5,11 +5,11 @@ import ImageBlock from "../ImageBlock";
 
 import styles from './index.module.scss'
 
-const CardPreview = ({card, url}) => {
+const CardPreview = ({card, url, onClick = () => {} }) => {
     const linkPath = url + '/' + card.id;
     return (
         <li>
-            <Link className={styles.link} to={linkPath}>
+            <Link onClick={onClick} className={styles.link} to={linkPath}>
                 <ImageBlock
                     classNameWrapper={styles.imageContainer}
                     imageUrl={card.imageUrl}
